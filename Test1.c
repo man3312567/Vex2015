@@ -10,11 +10,17 @@
 
 task main()
 {
+	
 	int leftJoystick = vexRT[Ch3];
 	int rightJoystick = vexRT[Ch2];
 	int intakeOn = false;
 	int intakeOnLast = false;
 	bool intakeRunning = false;
+	int shooterOn = false;
+	int shooterOnLast = false;
+	bool shooterRunning = false;
+	clearTimer(T1);
+	
 	while(true){
 		
 		//tank drive
@@ -40,9 +46,37 @@ task main()
 				intakeRunning = true;
 			}	
 		}
+		//shooter
+		shooterOnLast = shooterOn;
+		shooterOn = vexRT[Btn7D];
+		if(shooterOn == false && shooterOnLast == true){
+			if(shooterRunning == true){
+				//stop if button is pressed
+				motor[port5] = 0;
+				motor[port6] = 0;
+				motor[port7] = 0;
+				motor[port8] = 0;
+				shooterRunning = false;
+			}
+			else{
+				clearTimer(T1);
+				motor[port5] = 128;
+				motor[port6] = 128;
+				motor[port7] = 128;
+				motor[port8] = 128;
+				shooterRunning = true;
+				
+			}
+			
+		}
+		if(time1[T1] > 5000 && shooterRunning == true){
+				motor[port5] = 0;
+				motor[port6] = 0;
+				motor[port7] = 0;
+				motor[port8] = 0;
+				shooterRunning = false;
+				clearTimer(T1);
+		}0
 	}
 	//install firmware every time you connect the remote control and VexNet
 }
-	 3->1|
-			3->1
-/*
