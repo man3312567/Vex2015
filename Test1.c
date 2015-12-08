@@ -61,9 +61,9 @@ task main()
 			else{
 				clearTimer(T1);
 				motor[port5] = 128;
-				motor[port6] = 128;
+				motor[port6] = -128;
 				motor[port7] = 128;
-				motor[port8] = 128;
+				motor[port8] = -128;
 				shooterRunning = true;
 				
 			}
@@ -76,7 +76,6 @@ task main()
 				motor[port8] = 0;
 				shooterRunning = false;
 				clearTimer(T1);
-		}0
+		}
 	}
-	//install firmware every time you connect the remote control and VexNet
 }
